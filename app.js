@@ -1,3 +1,11 @@
+// 全局错误捕获
+window.onerror = function(msg, url, line, col, error) {
+  var errDiv = document.createElement('div');
+  errDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;background:red;color:white;padding:20px;z-index:99999;font-size:14px;';
+  errDiv.innerHTML = '<b>错误:</b> ' + msg + '<br><b>行号:</b> ' + line + '<br><b>列号:</b> ' + col;
+  document.body.appendChild(errDiv);
+  return false;
+};
 // ========== Max的学习打卡台 - 核心逻辑 ==========
 
 // ===== 数据存储层 =====
@@ -33,47 +41,46 @@ const LEVEL_SYSTEM = [
 // ===== 角色形象配置 =====
 const CHARACTER_IMAGES = [
   // 猫小九形态（12个）
-  { id:'mj01', name:'经典修炼·Q版', file:'01_经典修炼_Q版全身.png', category:'猫小九', cost:60 },
-  { id:'mj02', name:'经典修炼·立绘', file:'02_经典修炼_立绘.png', category:'猫小九', cost:60 },
-  { id:'mj03', name:'古风汉服·披肩', file:'03_古风汉服_红色披肩.png', category:'猫小九', cost:60 },
-  { id:'mj04', name:'古风汉服·半身', file:'04_古风汉服_半身.png', category:'猫小九', cost:60 },
-  { id:'mj05', name:'铠甲战士·封面', file:'05_铠甲战士_封面.png', category:'猫小九', cost:60 },
-  { id:'mj06', name:'铠甲战士·华丽', file:'06_铠甲战士_华丽.png', category:'猫小九', cost:60 },
-  { id:'mj07', name:'现代潮流·夹克', file:'07_现代潮流_夹克.png', category:'猫小九', cost:60 },
-  { id:'mj08', name:'现代潮流·半身', file:'08_现代潮流_半身.png', category:'猫小九', cost:60 },
-  { id:'mj09', name:'Q版可爱·头像', file:'09_Q版可爱_头像.png', category:'猫小九', cost:60 },
-  { id:'mj10', name:'中秋主题·月亮', file:'10_中秋主题_月亮.png', category:'猫小九', cost:60 },
-  { id:'mj11', name:'漫画版·少年', file:'11_漫画版_少年.png', category:'猫小九', cost:60 },
-  { id:'mj12', name:'守护校园·铠甲', file:'12_守护校园_铠甲.png', category:'猫小九', cost:60 },
+  { id:'mj01', name:'经典修炼·Q版', file:'01_经典修炼_Q版全身.png', category:'猫小九', cost:30 },
+  { id:'mj02', name:'经典修炼·立绘', file:'02_经典修炼_立绘.png', category:'猫小九', cost:30 },
+  { id:'mj03', name:'古风汉服·披肩', file:'03_古风汉服_红色披肩.png', category:'猫小九', cost:30 },
+  { id:'mj04', name:'古风汉服·半身', file:'04_古风汉服_半身.png', category:'猫小九', cost:30 },
+  { id:'mj05', name:'铠甲战士·封面', file:'05_铠甲战士_封面.png', category:'猫小九', cost:30 },
+  { id:'mj06', name:'铠甲战士·华丽', file:'06_铠甲战士_华丽.png', category:'猫小九', cost:30 },
+  { id:'mj07', name:'现代潮流·夹克', file:'07_现代潮流_夹克.png', category:'猫小九', cost:30 },
+  { id:'mj08', name:'现代潮流·半身', file:'08_现代潮流_半身.png', category:'猫小九', cost:30 },
+  { id:'mj09', name:'Q版可爱·头像', file:'09_Q版可爱_头像.png', category:'猫小九', cost:30 },
+  { id:'mj10', name:'中秋主题·月亮', file:'10_中秋主题_月亮.png', category:'猫小九', cost:30 },
+  { id:'mj11', name:'漫画版·少年', file:'11_漫画版_少年.png', category:'猫小九', cost:30 },
+  { id:'mj12', name:'守护校园·铠甲', file:'12_守护校园_铠甲.png', category:'猫小九', cost:30 },
   // 友方角色（9个）
-  { id:'ally01', name:'猫白灵', file:'猫白灵.png', category:'友方', cost:60 },
-  { id:'ally02', name:'猫小天', file:'猫小天.png', category:'友方', cost:60 },
-  { id:'ally03', name:'猫黑云', file:'猫黑云.png', category:'友方', cost:60 },
-  { id:'ally04', name:'猫白白', file:'猫白白.png', category:'友方', cost:60 },
-  { id:'ally05', name:'青仙儿', file:'青仙儿.png', category:'友方', cost:60 },
-  { id:'ally06', name:'狐小丽', file:'狐小丽.png', category:'友方', cost:60 },
-  { id:'ally07', name:'龙傲天', file:'龙傲天.png', category:'友方', cost:60 },
-  { id:'ally08', name:'剑子墨', file:'剑子墨.png', category:'友方', cost:60 },
-  { id:'ally09', name:'鹿灵雁', file:'鹿灵雁.png', category:'友方', cost:60 },
+  { id:'ally01', name:'猫白灵', file:'猫白灵.png', category:'友方', cost:30 },
+  { id:'ally02', name:'猫小天', file:'猫小天.png', category:'友方', cost:30 },
+  { id:'ally03', name:'猫黑云', file:'猫黑云.png', category:'友方', cost:30 },
+  { id:'ally04', name:'猫白白', file:'猫白白.png', category:'友方', cost:30 },
+  { id:'ally05', name:'青仙儿', file:'青仙儿.png', category:'友方', cost:30 },
+  { id:'ally06', name:'狐小丽', file:'狐小丽.png', category:'友方', cost:30 },
+  { id:'ally07', name:'龙傲天', file:'龙傲天.png', category:'友方', cost:30 },
+  { id:'ally08', name:'剑子墨', file:'剑子墨.png', category:'友方', cost:30 },
+  { id:'ally09', name:'鹿灵雁', file:'鹿灵雁.png', category:'友方', cost:30 },
   // 反派角色（8个）
-  { id:'vil01', name:'猫元', file:'猫元.png', category:'反派', cost:60 },
-  { id:'vil02', name:'猫里然', file:'猫里然.png', category:'反派', cost:60 },
-  { id:'vil03', name:'猫尘封', file:'猫尘封.png', category:'反派', cost:60 },
-  { id:'vil04', name:'鹏飞宇', file:'鹏飞宇.png', category:'反派', cost:60 },
-  { id:'vil05', name:'鹏天武', file:'鹏天武.png', category:'反派', cost:60 },
-  { id:'vil06', name:'狐言', file:'狐言.png', category:'反派', cost:60 },
-  { id:'vil07', name:'龙小筹', file:'龙小筹.png', category:'反派', cost:60 },
-  { id:'vil08', name:'白狼族战士', file:'白狼族战士.png', category:'反派', cost:60 }
+  { id:'vil01', name:'猫元', file:'猫元.png', category:'反派', cost:30 },
+  { id:'vil02', name:'猫里然', file:'猫里然.png', category:'反派', cost:30 },
+  { id:'vil03', name:'猫尘封', file:'猫尘封.png', category:'反派', cost:30 },
+  { id:'vil04', name:'鹏飞宇', file:'鹏飞宇.png', category:'反派', cost:30 },
+  { id:'vil05', name:'鹏天武', file:'鹏天武.png', category:'反派', cost:30 },
+  { id:'vil06', name:'狐言', file:'狐言.png', category:'反派', cost:30 },
+  { id:'vil07', name:'龙小筹', file:'龙小筹.png', category:'反派', cost:30 },
+  { id:'vil08', name:'猫墨', file:'猫墨.png', category:'反派', cost:30 }
 ];
 
 // ===== 背景配置 =====
 const BACKGROUND_IMAGES = [
-  { id:'bg01', name:'修炼山谷', file:'01_修炼山谷.jpg', cost:170 },
-  { id:'bg02', name:'宗门大殿', file:'02_宗门大殿.jpg', cost:170 },
-  { id:'bg03', name:'星空夜景', file:'03_星空夜景.jpg', cost:170 },
-  { id:'bg04', name:'云海仙境', file:'04_云海仙境.jpg', cost:170 }
+  { id:'bg01', name:'修炼山谷', file:'01_修炼山谷.jpg', cost:60 },
+  { id:'bg02', name:'宗门大殿', file:'02_宗门大殿.jpg', cost:60 },
+  { id:'bg03', name:'星空夜景', file:'03_星空夜景.jpg', cost:60 },
+  { id:'bg04', name:'云海仙境', file:'04_云海仙境.jpg', cost:60 }
 ];
-
 // ===== 默认图标分配 =====
 const DEFAULT_ICONS = {
   kanban: { overdue: '猫黑云.png', today: '猫白灵.png', pending: '龙傲天.png', upcoming: '剑子墨.png' },
@@ -84,87 +91,118 @@ const DEFAULT_TASKS = {
   // 周日（0）
   0: [
     // 语文
-    { id: 'cn_practice', name: '练字', icon: '✍️', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 5, star: 1 },
-    { id: 'cn_reading', name: '阅读', icon: '📖', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 5, star: 1 },
+    { id: 'cn_practice', name: '练字', icon: '✍️', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'cn_reading', name: '阅读', icon: '📖', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
     // 数学
-    { id: 'math_xes_1', name: '学而思作业1', icon: '📐', subject: 'math', type: 'daily', category: 'extracurricular', cultivation: 15, star: 1 },
+    { id: 'math_xes_1', name: '学而思作业1', icon: '📐', subject: 'math', type: 'daily', category: 'extracurricular', cultivation: 25, star: 1 },
     // 英语
-    { id: 'eng_xdf_1', name: '新东方作业1', icon: '🔤', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 15, star: 1 },
-    { id: 'eng_meibo', name: '美博英语', icon: '🎓', subject: 'english', type: 'class', category: 'special', cultivation: 5, star: 0 },
-    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'special', cultivation: 20, star: 0 },
-    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'special', cultivation: 20, star: 0 },
+    { id: 'eng_xdf_1', name: '新东方作业1', icon: '🔤', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 25, star: 1 },
+    { id: 'eng_meibo', name: '美博英语', icon: '🎓', subject: 'english', type: 'class', category: 'special', cultivation: 25, star: 0 },
+    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
     // 运动
-    { id: 'sport_jump_swim', name: '跳绳或游泳', icon: '🏊', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
-    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
+    { id: 'sport_jump', name: '跳绳', icon: '⏱️', subject: 'sport', type: 'daily', cultivation: 20, star: 0 },
+    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 25, star: 0 },
+    { id: 'sport_swim', name: '游泳', icon: '🏊', subject: 'sport', type: 'daily', cultivation: 25, star: 0 },
   ],
-  // 周一（1）：有晚训（水球），只完成校内作业
+  // 周一（1）
   1: [
+    // 校内作业
     { id: 'cn_school', name: '媛媛老师的作业', icon: '📝', subject: 'chinese', type: 'daily', category: 'school', cultivation: 10, star: 0 },
     { id: 'math_school', name: '西西老师的作业', icon: '📐', subject: 'math', type: 'daily', category: 'school', cultivation: 10, star: 0 },
     { id: 'eng_school', name: 'Ryan老师的作业', icon: '🔤', subject: 'english', type: 'daily', category: 'school', cultivation: 10, star: 0 },
-    { id: 'sport_waterpolo', name: '水球', icon: '🤽', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
+    // 课外作业
+    { id: 'cn_practice', name: '练字', icon: '✍️', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'cn_reading', name: '阅读', icon: '📖', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    // 运动
+    { id: 'sport_waterpolo', name: '水球', icon: '🤽', subject: 'sport', type: 'daily', cultivation: 30, star: 0 },
   ],
   // 周二（2）
   2: [
-    // 语文
+    // 校内作业
     { id: 'cn_school', name: '媛媛老师的作业', icon: '📝', subject: 'chinese', type: 'daily', category: 'school', cultivation: 10, star: 0 },
-    { id: 'cn_practice_reading', name: '练字或阅读', icon: '📚', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 5, star: 1 },
-    // 数学
     { id: 'math_school', name: '西西老师的作业', icon: '📐', subject: 'math', type: 'daily', category: 'school', cultivation: 10, star: 0 },
-    { id: 'math_xes_2', name: '学而思作业2', icon: '📐', subject: 'math', type: 'daily', category: 'extracurricular', cultivation: 15, star: 1 },
-    // 英语
     { id: 'eng_school', name: 'Ryan老师的作业', icon: '🔤', subject: 'english', type: 'daily', category: 'school', cultivation: 10, star: 0 },
-    { id: 'eng_xdf_2', name: '新东方作业2', icon: '🔤', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 15, star: 1 },
+    // 课外作业
+    { id: 'cn_practice', name: '练字', icon: '✍️', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'cn_reading', name: '阅读', icon: '📖', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'math_xes_2', name: '学而思作业2', icon: '📐', subject: 'math', type: 'daily', category: 'extracurricular', cultivation: 25, star: 1 },
+    { id: 'eng_xdf_2', name: '新东方作业2', icon: '🔤', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 25, star: 1 },
+    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
     // 运动
-    { id: 'sport_jump', name: '跳绳', icon: '⏱️', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
-    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
+    { id: 'sport_jump', name: '跳绳', icon: '⏱️', subject: 'sport', type: 'daily', cultivation: 20, star: 0 },
+    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 25, star: 0 },
   ],
-  // 周三（3）：只有美博英语（上课）
+  // 周三（3）
   3: [
-    { id: 'eng_meibo_class', name: '美博英语', icon: '🎓', subject: 'english', type: 'class', category: 'special', cultivation: 5, star: 0 },
-    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'special', cultivation: 20, star: 0 },
-    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'special', cultivation: 20, star: 0 },
+    // 课外作业
+    { id: 'cn_practice', name: '练字', icon: '✍️', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'cn_reading', name: '阅读', icon: '📖', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    // 专项任务
+    { id: 'eng_meibo_class', name: '美博英语', icon: '🎓', subject: 'english', type: 'class', category: 'special', cultivation: 25, star: 0 },
+    // 运动
+    { id: 'sport_jump', name: '跳绳', icon: '⏱️', subject: 'sport', type: 'daily', cultivation: 20, star: 0 },
+    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 25, star: 0 },
   ],
-  // 周四（4）：有晚训（水球），只完成校内作业
+  // 周四（4）
   4: [
+    // 校内作业
     { id: 'cn_school', name: '媛媛老师的作业', icon: '📝', subject: 'chinese', type: 'daily', category: 'school', cultivation: 10, star: 0 },
     { id: 'math_school', name: '西西老师的作业', icon: '📐', subject: 'math', type: 'daily', category: 'school', cultivation: 10, star: 0 },
     { id: 'eng_school', name: 'Ryan老师的作业', icon: '🔤', subject: 'english', type: 'daily', category: 'school', cultivation: 10, star: 0 },
-    { id: 'sport_waterpolo', name: '水球', icon: '🤽', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
+    // 课外作业
+    { id: 'cn_practice', name: '练字', icon: '✍️', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'cn_reading', name: '阅读', icon: '📖', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    // 运动
+    { id: 'sport_waterpolo', name: '水球', icon: '🤽', subject: 'sport', type: 'daily', cultivation: 30, star: 0 },
   ],
   // 周五（5）
   5: [
-    // 语文
+    // 校内作业
     { id: 'cn_school', name: '媛媛老师的作业', icon: '📝', subject: 'chinese', type: 'daily', category: 'school', cultivation: 10, star: 0 },
-    { id: 'cn_practice_reading', name: '练字或阅读', icon: '📚', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 5, star: 1 },
-    // 数学
     { id: 'math_school', name: '西西老师的作业', icon: '📐', subject: 'math', type: 'daily', category: 'school', cultivation: 10, star: 0 },
-    { id: 'math_xes_3', name: '学而思作业3', icon: '📐', subject: 'math', type: 'daily', category: 'extracurricular', cultivation: 15, star: 1 },
-    // 英语
     { id: 'eng_school', name: 'Ryan老师的作业', icon: '🔤', subject: 'english', type: 'daily', category: 'school', cultivation: 10, star: 0 },
-    { id: 'eng_xdf_3', name: '新东方作业3', icon: '🔤', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 15, star: 1, linked: true },
+    // 课外作业
+    { id: 'cn_practice', name: '练字', icon: '✍️', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'cn_reading', name: '阅读', icon: '📖', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'math_xes_3', name: '学而思作业3', icon: '📐', subject: 'math', type: 'daily', category: 'extracurricular', cultivation: 25, star: 1 },
+    { id: 'eng_xdf_3', name: '新东方作业3', icon: '🔤', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 25, star: 1, linked: true },
+    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
     // 运动
-    { id: 'sport_jump', name: '跳绳', icon: '⏱️', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
-    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
+    { id: 'sport_jump', name: '跳绳', icon: '⏱️', subject: 'sport', type: 'daily', cultivation: 20, star: 0 },
+    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 25, star: 0 },
   ],
   // 周六（6）
   6: [
-    // 英语
-    { id: 'eng_xdf_3', name: '新东方作业3', icon: '🔤', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 15, star: 1, linked: true },
-    { id: 'eng_xdf_class', name: '新东方上课', icon: '🏫', subject: 'english', type: 'class', category: 'special', cultivation: 5, star: 0 },
-    // 数学
-    { id: 'math_xes_4', name: '学而思作业4', icon: '📐', subject: 'math', type: 'daily', category: 'extracurricular', cultivation: 15, star: 1 },
-    { id: 'math_xes_class', name: '学而思上课', icon: '🏫', subject: 'math', type: 'class', category: 'special', cultivation: 5, star: 0 },
+    // 课外作业
+    { id: 'cn_practice', name: '练字', icon: '✍️', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'cn_reading', name: '阅读', icon: '📖', subject: 'chinese', type: 'daily', category: 'extracurricular', cultivation: 10, star: 1 },
+    { id: 'math_xes_4', name: '学而思作业4', icon: '📐', subject: 'math', type: 'daily', category: 'extracurricular', cultivation: 25, star: 1 },
+    { id: 'eng_xdf_3', name: '新东方作业3', icon: '🔤', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 25, star: 1, linked: true },
+    { id: 'eng_listening', name: '开车途中英语听力', icon: '🚗', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    { id: 'eng_animation', name: '英语动画', icon: '📺', subject: 'english', type: 'daily', category: 'extracurricular', cultivation: 20, star: 0 },
+    // 专项任务
+    { id: 'eng_xdf_class', name: '新东方上课', icon: '🏫', subject: 'english', type: 'class', category: 'special', cultivation: 30, star: 0 },
+    { id: 'math_xes_class', name: '学而思上课', icon: '🏫', subject: 'math', type: 'class', category: 'special', cultivation: 30, star: 0 },
+    { id: 'eng_meibo_class', name: '美博英语', icon: '🎓', subject: 'english', type: 'class', category: 'special', cultivation: 25, star: 0 },
     // 运动
-    { id: 'sport_jump', name: '跳绳', icon: '⏱️', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
-    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 5, star: 0 },
+    { id: 'sport_jump', name: '跳绳', icon: '⏱️', subject: 'sport', type: 'daily', cultivation: 20, star: 0 },
+    { id: 'sport_stretch', name: '拉伸', icon: '🤸', subject: 'sport', type: 'daily', cultivation: 25, star: 0 },
   ],
 };
 
 const DEFAULT_SPECIAL_TASKS = [
   { id:'sp1', name:'课外阅读', subject:'chinese', type:'progress', weeklyTarget:2, current:0, unit:'本', icon:'📖' },
   { id:'sp2', name:'学而思语文', subject:'chinese', type:'chapters', weeklyTarget:3, needConfirm:true, chapters:[
-    {id:'c0',name:'小蝌蚪找妈妈',done:false},{id:'c1',name:'我是什么',done:false},{id:'c2',name:'植物妈妈有办法',done:false},
+    {id:'c0',name:'小蝌蚪找妈妈',done:true},{id:'c1',name:'我是什么',done:false},{id:'c2',name:'植物妈妈有办法',done:false},
     {id:'c3',name:'场景歌',done:false},{id:'c4',name:'树之歌',done:false},{id:'c5',name:'拍手歌',done:false},{id:'c6',name:'田家四季歌',done:false},
     {id:'c7',name:'曹冲称象',done:false},{id:'c8',name:'玲玲的画',done:false},{id:'c9',name:'一封信',done:false},{id:'c10',name:'妈妈睡了',done:false},
     {id:'c11',name:'古诗二首（登鹳雀楼、望庐山瀑布）',done:false},{id:'c12',name:'黄山奇石',done:false},{id:'c13',name:'日月潭',done:false},{id:'c14',name:'葡萄沟',done:false},
@@ -181,15 +219,15 @@ const DEFAULT_SPECIAL_TASKS = [
 const STAR_TO_COIN_RATIO = 5;
 
 const DEFAULT_REWARDS = [
-  { id:'r1', name:'购买1款零食', cost:10, icon:'🍿', limitPeriod:'week', limitCount:2 },
-  { id:'r2', name:'决定点1次外卖', cost:30, icon:'🍔', limitPeriod:'week', limitCount:1 },
-  { id:'r3', name:'决定1次家庭电影/动画片', cost:40, icon:'🎬', limitPeriod:'week', limitCount:1 },
-  { id:'r4', name:'决定1次周末亲子活动', cost:60, icon:'🎡', limitPeriod:'month', limitCount:2 },
-  { id:'r5', name:'决定外出就餐的餐厅', cost:80, icon:'🍽️', limitPeriod:'month', limitCount:3 },
-  { id:'r6', name:'购买1件兴趣装备', cost:100, icon:'🎯', limitPeriod:'month', limitCount:1 },
-  { id:'r7', name:'骑马1次', cost:120, icon:'🐴', limitPeriod:'month', limitCount:2 },
-  { id:'r8', name:'购买1个玩具', cost:150, icon:'🧸', limitPeriod:'year', limitCount:1 },
-  { id:'r9', name:'娱乐时间15分钟', cost:50, icon:'⏰', limitPeriod:'week', limitCount:2, isEntertainment:true }
+  { id:'r1', name:'购买1款零食', cost:5, icon:'🍿', limitPeriod:'week', limitCount:2 },
+  { id:'r2', name:'决定点1次外卖', cost:10, icon:'🍔', limitPeriod:'week', limitCount:1 },
+  { id:'r3', name:'决定1次家庭电影/动画片', cost:5, icon:'🎬', limitPeriod:'week', limitCount:1 },
+  { id:'r9', name:'娱乐时间15分钟', cost:8, icon:'⏰', limitPeriod:'week', limitCount:2, isEntertainment:true },
+  { id:'r4', name:'决定1次周末亲子活动', cost:5, icon:'🎡', limitPeriod:'month', limitCount:2 },
+  { id:'r5', name:'决定外出就餐的餐厅', cost:5, icon:'🍽️', limitPeriod:'month', limitCount:3 },
+  { id:'r6', name:'购买1件兴趣装备', cost:15, icon:'🎯', limitPeriod:'month', limitCount:1 },
+  { id:'r7', name:'骑马1次', cost:15, icon:'🐴', limitPeriod:'month', limitCount:2 },
+  { id:'r8', name:'购买1个玩具', cost:30, icon:'🧸', limitPeriod:'year', limitCount:1 }
 ];
 
 const DEFAULT_BADGES = [
@@ -229,6 +267,14 @@ let currentHomeView = 'kanban';
 let characterImages = {};
 
 // ===== 工具函数 =====
+// 格式化星星数量（整数直接显示，小数保留1位）
+function formatStars(num) {
+  if (num === null || num === undefined || isNaN(num)) return '0';
+  const n = Number(num);
+  if (n === Math.floor(n)) return String(n);
+  return n.toFixed(1);
+}
+
 function todayStr() {
   const d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
@@ -465,6 +511,64 @@ function initData() {
     console.error('[migration v9] 奖励配置更新失败:', e);
   }
   
+  // 配置迁移v11：强制更新奖励价格为最新测算值（按70%完成率）
+  try {
+    if (AppData.config && AppData.config.rewards) {
+      DEFAULT_REWARDS.forEach(dr => {
+        const existing = AppData.config.rewards.find(r => r.id === dr.id);
+        if (existing) {
+          existing.name = dr.name;
+          existing.icon = dr.icon;
+          existing.cost = dr.cost;
+          existing.limitPeriod = dr.limitPeriod;
+          existing.limitCount = dr.limitCount;
+          if (dr.isEntertainment !== undefined) existing.isEntertainment = dr.isEntertainment;
+        }
+      });
+      // 按DEFAULT_REWARDS顺序重排
+      AppData.config.rewards.sort((a, b) => {
+        const ia = DEFAULT_REWARDS.findIndex(d => d.id === a.id);
+        const ib = DEFAULT_REWARDS.findIndex(d => d.id === b.id);
+        return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+      });
+      console.log('[migration v11] 奖励价格已更新为最新测算值');
+    }
+  } catch(e) {
+    console.error('[migration v11] 奖励价格更新失败:', e);
+  }
+
+  // 迁移v12：补发此前升级未发放的奖励星（按当前实际境界/星级一次性结算，只跑一次）
+  try {
+    if (!AppData.status._levelStarFixed) {
+      let shouldStars = 0;
+      for (let i = 0; i < AppData.status.levelIndex; i++) {
+        shouldStars += LEVEL_SYSTEM[i].expPerStar / 100 * 9;
+      }
+      shouldStars += LEVEL_SYSTEM[AppData.status.levelIndex].expPerStar / 100 * AppData.status.starIndex;
+      const gap = Math.round((shouldStars - (AppData.status.stars || 0)) * 100) / 100;
+      if (gap > 0) {
+        AppData.status.stars = Math.round(((AppData.status.stars || 0) + gap) * 100) / 100;
+        console.log('[migration v12] 补发升级奖励星: +' + gap + ' (当前境界应得' + shouldStars + ')');
+      }
+      AppData.status._levelStarFixed = true;
+    }
+  } catch(e) {
+    console.error('[migration v12] 补发升级奖励星失败:', e);
+  }
+
+  // 迁移v13：清理待确认列表里残留的学而思语文课文项（该任务已下线）
+  try {
+    if (Array.isArray(AppData.pendingReview)) {
+      const before = AppData.pendingReview.length;
+      AppData.pendingReview = AppData.pendingReview.filter(r => !(r.taskId && String(r.taskId).indexOf('xes_') === 0));
+      if (AppData.pendingReview.length !== before) {
+        console.log('[migration v13] 清理残留学而思语文待确认项: ' + (before - AppData.pendingReview.length) + ' 条');
+      }
+    }
+  } catch(e) {
+    console.error('[migration v13] 清理残留学而思语文待确认项失败:', e);
+  }
+
   // 配置迁移：更新学而思语文章节列表（保留已完成进度）
   try {
     if (AppData.config && AppData.config.specialTasks) {
@@ -490,6 +594,11 @@ function initData() {
           }
         }
         if (xesChinese.needConfirm === undefined) xesChinese.needConfirm = true;
+        // 迁移v10：小蝌蚪找妈妈已于9月4日学完，标记为完成
+        if (xesChinese.chapters && xesChinese.chapters[0] && xesChinese.chapters[0].name === '小蝌蚪找妈妈' && !xesChinese.chapters[0].done) {
+          xesChinese.chapters[0].done = true;
+          console.log('[migration v10] 已将小蝌蚪找妈妈标记为完成');
+        }
       }
       
       // 更新"课外绘本"为"课外阅读"
@@ -533,40 +642,66 @@ function getExpBeforeLevel(levelIdx, starIdx) {
   return total;
 }
 
+// 根据总修为推算境界和星级（每境界9星，starIndex 0-8）
+function calcLevelByExp(totalExp) {
+  let acc = 0;
+  for (let i = 0; i < LEVEL_SYSTEM.length; i++) {
+    const perStar = LEVEL_SYSTEM[i].expPerStar;
+    const levelTotal = perStar * 9;
+    const isLast = i === LEVEL_SYSTEM.length - 1;
+    if (isLast || totalExp < acc + levelTotal) {
+      const within = Math.max(0, totalExp - acc);
+      let star = Math.floor(within / perStar);
+      star = Math.max(0, Math.min(8, star));
+      return { levelIndex: i, starIndex: star };
+    }
+    acc += levelTotal;
+  }
+  return { levelIndex: LEVEL_SYSTEM.length - 1, starIndex: 8 };
+}
+
 function addCultivation(amount, reason) {
   const s = AppData.status;
   const beforeLevel = s.levelIndex, beforeStar = s.starIndex;
-  s.totalCultivation += amount;
-  
-  // 检查升级
+  // 总修为始终为真实累加值：支持一次调整任意数值，超出当前星的修为自动结转到下一星
+  s.totalCultivation = Math.max(0, (s.totalCultivation || 0) + amount);
+
+  // 根据总修为重新推算目标境界/星级
+  const target = calcLevelByExp(s.totalCultivation);
+  const targetRank = target.levelIndex * 9 + target.starIndex;
+  const beforeRank = beforeLevel * 9 + beforeStar;
+
   let leveledUp = false;
-  while (true) {
-    const info = getLevelInfo();
-    if (info.isMax) break;
-    if (info.expCurrent >= info.expNeeded) {
-      s.totalCultivation = getExpBeforeLevel(s.levelIndex, s.starIndex) + info.expNeeded;
-      if (s.starIndex < 8) {
-        s.starIndex++;
+  if (targetRank > beforeRank) {
+    // 连升多级：逐级生成升级记录
+    let curL = beforeLevel, curS = beforeStar;
+    while (curL < target.levelIndex || (curL === target.levelIndex && curS < target.starIndex)) {
+      const fromName = LEVEL_SYSTEM[curL].name + '\u2b50' + (curS + 1);
+      if (curS < 8) {
+        curS++;
       } else {
-        s.starIndex = 0;
-        s.levelIndex++;
+        curS = 0;
+        curL++;
       }
-      s.totalCultivation = getExpBeforeLevel(s.levelIndex, s.starIndex);
-      leveledUp = true;
-      s.levelUpCount++;
-      const newInfo = getLevelInfo();
+      s.levelUpCount = (s.levelUpCount || 0) + 1;
       AppData.levelUpRecords.unshift({
         date: todayStr(),
         time: new Date().toLocaleTimeString(),
-        from: LEVEL_SYSTEM[beforeLevel].name + '⭐' + (beforeStar+1),
-        to: newInfo.levelName + '⭐' + newInfo.star,
+        from: fromName,
+        to: LEVEL_SYSTEM[curL].name + '\u2b50' + (curS + 1),
         reason: reason
       });
-      checkBadges();
-    } else break;
+      // 升星奖励：新到星级所在境界 expPerStar/100 颗奖励星（武者1、武师2、武灵3.5……）
+      AppData.status.stars = (AppData.status.stars || 0) + LEVEL_SYSTEM[curL].expPerStar / 100;
+      leveledUp = true;
+    }
   }
-  
+  // 负数调整导致降级时，直接落到目标境界/星级（已获得的奖励不追回）
+  s.levelIndex = target.levelIndex;
+  s.starIndex = target.starIndex;
+
   if (leveledUp) {
+    checkBadges();
     const info = getLevelInfo();
     showLevelUp(info);
   }
@@ -603,33 +738,6 @@ function getTodayTasks() {
   const day = getDayOfWeek();
   let tasks = (AppData.config.weeklyTasks[day] || []).slice();
   
-  // 动态添加学而思语文当前待学习课文（放到课外作业中）
-  try {
-    const xesTask = AppData.config.specialTasks.find(t => t.id === 'sp2' || t.name === '学而思语文');
-    if (xesTask && xesTask.chapters) {
-      const pendingChapters = xesTask.chapters.filter(c => !c.done).slice(0, 3);
-      pendingChapters.forEach((chap, idx) => {
-        const fakeTaskId = 'xes_' + chap.id;
-        const isPending = AppData.pendingReview.some(r => r.taskId === fakeTaskId);
-        tasks.push({
-          id: fakeTaskId,
-          name: '学而思语文：' + chap.name,
-          type: 'chinese',
-          subject: 'chinese',
-          category: 'extracurricular',
-          cultivation: 15,
-          star: 1,
-          required: true,
-          isXesChinese: true,
-          chapterId: chap.id,
-          _status: isPending ? 'pendingReview' : 'pending'
-        });
-      });
-    }
-  } catch (e) {
-    console.error('添加学而思语文任务失败:', e);
-  }
-
   // 动态添加英语每日专项任务（开车途中英语听力、英语动画）
   try {
     const englishDailySpecials = [
@@ -638,8 +746,8 @@ function getTodayTasks() {
     ];
     englishDailySpecials.forEach(specialTask => {
       // 检查当天是否已经有这个任务
-      const exists = tasks.some(t => t.id === specialTask.id);
-      if (!exists) {
+      const existing = tasks.find(t => t.id === specialTask.id);
+      if (!existing) {
         // 创建任务副本，确保所有属性都正确
         const newTask = Object.assign({}, specialTask);
         // 确保没有_status字段，让状态由getTaskStatus动态获取
@@ -647,7 +755,10 @@ function getTodayTasks() {
         tasks.push(newTask);
         console.log('[英语专项任务] 已添加任务:', newTask.id, newTask.name);
       } else {
-        console.log('[英语专项任务] 任务已存在，跳过:', specialTask.id);
+        // 已存在则强制纠正category为special，避免重复显示在课外作业
+        existing.category = 'special';
+        existing.subject = 'english';
+        existing.cultivation = specialTask.cultivation;
       }
     });
   } catch (e) {
@@ -977,7 +1088,7 @@ function updateTopbar() {
   const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
   document.getElementById('topbarDate').textContent = 
     d.getFullYear() + '年' + (d.getMonth()+1) + '月' + d.getDate() + '日 ' + weekdays[d.getDay()];
-  document.getElementById('topbarStars').textContent = AppData.status.stars;
+  document.getElementById('topbarStars').textContent = formatStars(AppData.status.stars);
   document.getElementById('topbarCultivation').textContent = AppData.status.totalCultivation;
   document.getElementById('topbarStreak').textContent = AppData.status.continuousDays;
   
@@ -1052,7 +1163,7 @@ function renderHeroPanel() {
   const heroTodayDoneEl = document.getElementById('heroTodayDone');
   if (heroTodayDoneEl) heroTodayDoneEl.textContent = doneCount + '/' + tasks.length;
   document.getElementById('heroPending').textContent = AppData.pendingReview.length;
-  document.getElementById('heroStars').textContent = AppData.status.stars;
+  document.getElementById('heroStars').textContent = formatStars(AppData.status.stars);
   
   // 角色图片：优先自定义头像，否则跟随境界
   try {
@@ -1164,7 +1275,7 @@ function renderKanbanColumn(cls, title, icon, items, renderFn) {
     if (bgIconFile) {
       html += '<div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,0.88);border-radius:16px;pointer-events:none;z-index:0;"></div>';
     }
-    html += '<div style="position:relative;z-index:1;">';
+    html += '<div style="position:relative;z-index:1;flex:1;display:flex;flex-direction:column;min-height:0;">';
     // 看板列图标：优先使用角色形象
     let colIconHtml = icon;
     let iconFile = null;
@@ -1717,7 +1828,7 @@ function renderReward() {
     console.log('[奖励中心]   奖励' + (idx+1) + ': ' + r.id + ' - ' + r.name + ' (' + r.cost + '星)');
   });
   const rewardStarsEl = document.getElementById('rewardStars');
-  if (rewardStarsEl) rewardStarsEl.textContent = AppData.status.stars || 0;
+  if (rewardStarsEl) rewardStarsEl.textContent = formatStars(AppData.status.stars || 0);
   document.getElementById('rewardEnt').textContent = AppData.status.entertainmentMinutes;
   
   let html = '';
@@ -2830,8 +2941,8 @@ function init() {
     }
   } catch(e) { console.error('✗ 密码输入绑定错误', e); }
   
-  // 请求通知权限（出错不影响核心功能）
-  try { requestNotificationPermission(); console.log('✓ 通知权限请求完成'); } catch(e) { console.error('✗ 通知权限错误', e); }
+  // 请求通知权限（已禁用）
+  // 通知权限请求已禁用（避免每次打开弹出"此文件想要显示通知"提示）
   
   // 启动提醒（出错不影响核心功能）
   try { startReminderCheck(); console.log('✓ 提醒检查启动完成'); } catch(e) { console.error('✗ 提醒检查错误', e); }
